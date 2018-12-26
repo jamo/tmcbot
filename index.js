@@ -1,23 +1,19 @@
 const token = process.env.BOT_TOKEN
-// reply('NetBeansissa, valitse TMC -> Send code to TMC pastebin ja kopio linkki tänne.')
 
 module.exports = async (req, res) => {
-  console.log('GOT REQUEST')
-  console.log('GOT REQUEST1', req.url)
-  console.log('GOT REQUEST1', req.method)
-  let body = ''
 
   if (req.method === 'POST') {
+    let body = ''
     req.on('data', data => {
       body += data
     })
     req.on('end', async () =>{
-      console.log('GOT REQUEST1', body)
       return await handleMessage(JSON.parse(body), res)
     })
 
   } else {
     res.end(`hello`);
+    return
   }
 
 }
@@ -33,10 +29,10 @@ async function handleMessage(body, res) {
     const msg = {method: 'sendMessage', chat_id: body.message.chat.id, text: text}
     console.log('sending:', JSON.stringify(msg))
     res.end(JSON.stringify(msg))
-//  } else if (body.message.from.id == 181771615) {
-//    msg = {method: 'sendMessage', chat_id: body.message.chat.id, text: JSON.stringify(body)}
-//    console.log('sending:', JSON.stringify(msg))
-//    res.end(JSON.stringify(msg))
+  } else if (body.message.text === '/jamo-test') {
+    msg = {method: 'sendMessage', chat_id: body.message.chat.id, text: JSON.stringify(body)}
+    console.log('sending:', JSON.stringify(msg))
+    res.end(JSON.stringify(msg))
   } else {
     res.end('')
   }
