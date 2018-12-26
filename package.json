@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "fix-lint": "prettier --trailing-comma --single-quote --no-semi --write index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
