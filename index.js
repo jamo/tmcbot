@@ -24,7 +24,7 @@ async function handleMessage({ message }, res) {
   if (message.reply_to_message && message.reply_to_message.message_id) {
     msg['reply_to_message_id'] = message.reply_to_message.message_id
   }
-  if (message.text === '/paste') {
+  if (message.text === '!paste') {
     let text = ''
     if (message.reply_to_message && message.reply_to_message.from.username) {
       text = `@${message.reply_to_message.from.username} `
