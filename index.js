@@ -11,7 +11,8 @@ module.exports = async (req, res) => {
     })
     req.on('end', async () => {
       console.log('got data: ', body)
-      return await handleMessage(JSON.parse(body), res)
+      const parsedBody = JSON.parse(body)
+      return await handleMessage(parsedBody.message || parsedBody.edited_message , res)
     })
   } else {
     res.end(`hello`)
@@ -19,7 +20,7 @@ module.exports = async (req, res) => {
   }
 }
 
-async function handleMessage({ message }, res) {
+async function handleMessage(message , res) {
   console.log('got req:', JSON.stringify(message))
   const msg = {}
   if (message.reply_to_message && message.reply_to_message.message_id) {
