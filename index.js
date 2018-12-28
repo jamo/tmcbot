@@ -50,7 +50,7 @@ async function handleMessage(message , res) {
       chat_id: message.chat.id,
       text: text,
     })
-  } else if (message.text === '/idelog' || /!idelog/.test(message.text)) {
+  } else if (/!idelog/.test(message.text)) {
     let text = ''
     if (message.reply_to_message && message.reply_to_message.from.username) {
       text = `@${message.reply_to_message.from.username} `
@@ -61,7 +61,7 @@ async function handleMessage(message , res) {
       chat_id: message.chat.id,
       text: text,
     })
-  } else if (message.text === '/jamo-test') {
+  } else if (message.text === '!jamo-test') {
     Object.assign(msg, {
       method: 'sendMessage',
       chat_id: message.chat.id,
