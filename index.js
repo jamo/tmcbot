@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
       body += data
     })
     req.on('end', async () => {
+      console.log('got data: ', body)
       return await handleMessage(JSON.parse(body), res)
     })
   } else {
