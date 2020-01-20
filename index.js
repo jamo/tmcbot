@@ -43,28 +43,6 @@ async function handleMessage(message , res) {
       chat_id: message.chat.id,
       text: text,
     })
-  } else if (/!paste/.test(message.text)) {
-    let text = ''
-    if (message.reply_to_message && message.reply_to_message.from.username) {
-      text = `@${message.reply_to_message.from.username} `
-    }
-    text += pasteTextFi
-    Object.assign(msg, {
-      method: 'sendMessage',
-      chat_id: message.chat.id,
-      text: text,
-    })
-  } else if (/!idelog/.test(message.text)) {
-    let text = ''
-    if (message.reply_to_message && message.reply_to_message.from.username) {
-      text = `@${message.reply_to_message.from.username} `
-    }
-    text += ideLogTextFi
-    Object.assign(msg, {
-      method: 'sendMessage',
-      chat_id: message.chat.id,
-      text: text,
-    })
   } else if (/!paste-en/.test(message.text)) {
     let text = ''
     if (message.reply_to_message && message.reply_to_message.from.username) {
@@ -82,6 +60,28 @@ async function handleMessage(message , res) {
       text = `@${message.reply_to_message.from.username} `
     }
     text += ideLogTextEn
+    Object.assign(msg, {
+      method: 'sendMessage',
+      chat_id: message.chat.id,
+      text: text,
+    })
+  } else if (/!paste/.test(message.text)) {
+    let text = ''
+    if (message.reply_to_message && message.reply_to_message.from.username) {
+      text = `@${message.reply_to_message.from.username} `
+    }
+    text += pasteTextFi
+    Object.assign(msg, {
+      method: 'sendMessage',
+      chat_id: message.chat.id,
+      text: text,
+    })
+  } else if (/!idelog/.test(message.text)) {
+    let text = ''
+    if (message.reply_to_message && message.reply_to_message.from.username) {
+      text = `@${message.reply_to_message.from.username} `
+    }
+    text += ideLogTextFi
     Object.assign(msg, {
       method: 'sendMessage',
       chat_id: message.chat.id,
