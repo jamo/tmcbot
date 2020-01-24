@@ -1,8 +1,5 @@
 const token = process.env.BOT_TOKEN
-const pasteTextFi =
-  'Valitse Netbeansin ylävalikosta "TMC" -> "Send code to TMC Pastebin" ja valitse avautuvasta ikkunasta "Send". Tämän jälkeen saat linkin koodiisi, jonka voit kopioida ja liittää tänne.'
-
-const ideLogTextFi = 'Saat Netbeanssin IDE login näin: 1. Avaa Netbeans. 2. Aiheuta ongelma uudestaan. 3. Valitse Netbeanssin yläpalkista "View" -> "IDE Log". 4. Kopioi avautuvasta paneelista kaikki teksti ja liitä se vastaukseesi.'
+const replyMsgs = require('./messages')
 
 const pasteTextEn = 'In Netbeans, click "TMC" -> "Send code to TMC Pastebin" from the top row. Click "Send" in the opened window. This will give you a link to your code that you can copy and paste here.'
 
@@ -18,7 +15,10 @@ module.exports = async (req, res) => {
     req.on('end', async () => {
       console.log('got data: ', body)
       const parsedBody = JSON.parse(body)
-      return await handleMessage(parsedBody.message || parsedBody.edited_message , res)
+      return await handleMessage(
+        parsedBody.message || parsedBody.edited_message,
+        res
+      )
     })
   } else {
     res.end(`hello`)
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
   }
 }
 
-async function handleMessage(message , res) {
+async function handleMessage(message, res) {
   console.log('got req:', JSON.stringify(message))
   const msg = {}
   if (message.reply_to_message && message.reply_to_message.message_id) {
@@ -37,7 +37,7 @@ async function handleMessage(message , res) {
     if (message.reply_to_message && message.reply_to_message.from.username) {
       text = `@${message.reply_to_message.from.username} `
     }
-    text += "käytä !paste /paste tilalla"
+    text += 'käytä !paste /paste tilalla'
     Object.assign(msg, {
       method: 'sendMessage',
       chat_id: message.chat.id,
@@ -70,7 +70,7 @@ async function handleMessage(message , res) {
     if (message.reply_to_message && message.reply_to_message.from.username) {
       text = `@${message.reply_to_message.from.username} `
     }
-    text += pasteTextFi
+    text += replyMsgs.pasteTextFi
     Object.assign(msg, {
       method: 'sendMessage',
       chat_id: message.chat.id,
@@ -81,7 +81,18 @@ async function handleMessage(message , res) {
     if (message.reply_to_message && message.reply_to_message.from.username) {
       text = `@${message.reply_to_message.from.username} `
     }
-    text += ideLogTextFi
+    text += replyMsgs.ideLogTextFi
+    Object.assign(msg, {
+      method: 'sendMessage',
+      chat_id: message.chat.id,
+      text: text,
+    })
+  } else if (/!chmod/.test(message.text)) {
+    let text = ''
+    if (message.reply_to_message && message.reply_to_message.from.username) {
+      text = `@${message.reply_to_message.from.username} `
+    }
+    text += replyMsgs.chmodTextFi
     Object.assign(msg, {
       method: 'sendMessage',
       chat_id: message.chat.id,
