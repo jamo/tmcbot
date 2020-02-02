@@ -6,7 +6,7 @@ const ideLogTextFi = 'Saat Netbeanssin IDE login näin: 1. Avaa Netbeans. 2. Aih
 
 const pasteTextEn = 'In Netbeans, click "TMC" -> "Send code to TMC Pastebin" from the top row. Click "Send" in the opened window. This will give you a link to your code that you can copy and paste here.'
 
-const ideLogTextEn = 'You can retrieve the Netbeans IDE log through these steps: 1. Open Netbeans. 2. Replicate the problem. 3. From the Netbeans top row, choose "Wiev" -> "IDE log". 4. Copy all the text from the opened panel, paste it to a pastebin service (such as pastebin.org), and send the link here.'
+const ideLogTextEn = 'You can retrieve the Netbeans IDE log through these steps: 1. Open Netbeans. 2. Replicate the problem. 3. From the Netbeans top row, choose "View" -> "IDE log". 4. Copy all the text from the opened panel, paste it to a pastebin service (such as pastebin.org), and send the link here.'
 
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json')
